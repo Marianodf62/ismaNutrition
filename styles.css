@@ -327,6 +327,7 @@ i { font-style: italic; font-family: var(--serif); font-weight: 400; }
 .meals li { display: grid; grid-template-columns: 26px 1fr; gap: 8px; font-size: .85rem; color: var(--cream-2); padding-top: 8px; border-top: 1px solid var(--line); }
 .meals li b { display: block; font-size: .68rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); font-weight: 700; }
 .day-card.is-today { box-shadow: 0 0 0 2px var(--lime), 0 30px 60px -30px rgba(200,241,105,.5); }
+.day-pills { display: none; }
 
 /* ---------- Testimonials ---------- */
 .testimonials { background: var(--bg-2); }
@@ -431,6 +432,74 @@ details p { color: var(--muted); padding-bottom: 22px; margin-top: -6px; }
   .footer-inner { grid-template-columns: 1fr; }
   .footer-links { justify-self: start; flex-wrap: wrap; }
 }
+/* ---------- Mobile: todo centrado ---------- */
+@media (max-width: 900px) {
+  .hero-copy, .about-copy, .section-head, .service, .step, .t-card,
+  .faq-grid > div, .cta-box, .footer-inner { text-align: center; }
+  .hero-sub, .section-note { margin-inline: auto; }
+  .hero-actions { justify-content: center; }
+  .hero-proof { flex-direction: column; justify-content: center; gap: 10px; }
+  .kicker::after { content: ""; width: 28px; height: 1px; background: currentColor; }
+  .cta-box .kicker::after { display: none; }
+  .section-head { margin-inline: auto; }
+  .section-head.split { flex-direction: column; align-items: center; gap: 0; }
+  .creds li { justify-content: center; text-align: center; }
+  .creds li:hover { transform: none; }
+  .stats { text-align: center; }
+  .service-ico, .step-n { margin-left: auto; margin-right: auto; }
+  .steps { justify-items: center; }
+  .step { max-width: 320px; }
+  .t-card figcaption { justify-content: center; text-align: left; }
+  summary { justify-content: center; text-align: center; position: relative; padding: 22px 26px; }
+  summary::after { position: absolute; right: 0; }
+  details p { text-align: center; }
+  .footer-inner { justify-items: center; }
+  .footer-links { justify-self: center; justify-content: center; }
+}
+
+/* ---------- Mobile: menú semanal (un día a la vez, sin movimiento) ---------- */
+@media (max-width: 768px) {
+  .week-controls { display: none; }
+  .day-pills {
+    display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px;
+    margin-bottom: 18px;
+  }
+  .day-pill {
+    padding: 10px 0; border-radius: 14px; border: 1px solid var(--line);
+    font-size: .72rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase;
+    color: var(--muted); background: rgba(255,255,255,.02); position: relative;
+    transition: background .25s, color .25s, border-color .25s;
+  }
+  .day-pill.today::after { content: ""; position: absolute; top: 5px; right: 5px; width: 5px; height: 5px; border-radius: 50%; background: var(--lime); }
+  .day-pill.active { background: var(--lime); color: var(--bg); border-color: var(--lime); }
+  .day-pill.active.today::after { background: var(--bg); }
+
+  .week { display: block; overflow: visible; margin: 0; padding: 0; cursor: auto; scroll-snap-type: none; }
+  .day-card {
+    display: none; aspect-ratio: auto; opacity: 1; transform: none; transition: none;
+    border: 1px solid var(--line); user-select: auto;
+  }
+  .day-card.selected { display: block; animation: dayIn .35s ease; }
+  .day-card.is-today { box-shadow: 0 0 0 2px var(--lime); }
+  .day-card img, .day-card:hover img, .day-card.active img {
+    position: relative; z-index: 0; height: 230px; transform: none; filter: none; transition: none;
+  }
+  .day-card::after { display: none; }
+  .day-top { z-index: 1; }
+  .day-body { position: static; padding: 22px 20px 24px; text-align: center; }
+  .day-body h3 { font-size: 1.6rem; }
+  .meals, .day-card:hover .meals, .day-card.active .meals {
+    max-height: none; opacity: 1; margin-top: 18px; transition: none; gap: 0;
+  }
+  .meals li {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    text-align: center; font-size: .95rem; padding: 14px 0;
+  }
+  .meals li span { font-size: 1.4rem; line-height: 1; }
+  .meals li b { margin-bottom: 2px; }
+}
+@keyframes dayIn { from { opacity: 0; } to { opacity: 1; } }
+
 @media (max-width: 600px) {
   .services-grid, .t-grid, .steps { grid-template-columns: 1fr; }
   .hero-visual { max-width: 300px; }

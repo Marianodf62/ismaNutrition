@@ -127,6 +127,25 @@ WEEK.forEach((d, i) => {
   weekEl.appendChild(card);
 });
 
+// Selector de días (mobile): muestra una sola tarjeta a la vez
+const pillsEl = document.getElementById("dayPills");
+function selectDay(idx) {
+  [...weekEl.children].forEach((c, i) => c.classList.toggle("selected", i === idx));
+  [...pillsEl.children].forEach((p, i) => {
+    p.classList.toggle("active", i === idx);
+    p.setAttribute("aria-selected", i === idx);
+  });
+}
+WEEK.forEach((d, i) => {
+  const pill = document.createElement("button");
+  pill.className = "day-pill" + (i === todayIdx ? " today" : "");
+  pill.setAttribute("role", "tab");
+  pill.textContent = d.day.slice(0, 3);
+  pill.addEventListener("click", () => selectDay(i));
+  pillsEl.appendChild(pill);
+});
+selectDay(todayIdx);
+
 // Scroll hasta el día de hoy
 requestAnimationFrame(() => {
   const today = weekEl.children[todayIdx];
