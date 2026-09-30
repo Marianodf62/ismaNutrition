@@ -443,7 +443,7 @@ details p { color: var(--muted); padding-bottom: 22px; margin-top: -6px; }
   .cta-box .kicker::after { display: none; }
   .section-head { margin-inline: auto; }
   .section-head.split { flex-direction: column; align-items: center; gap: 0; }
-  .creds li { justify-content: center; text-align: center; }
+  .creds li { flex-direction: column; justify-content: center; text-align: center; gap: 6px; }
   .creds li:hover { transform: none; }
   .stats { text-align: center; }
   .service-ico, .step-n { margin-left: auto; margin-right: auto; }
